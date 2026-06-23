@@ -3,44 +3,1364 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Улан Махмараимов</title>
+    <title>VPN — Коопсуз Интернет Саякаты</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #fff;
+            overflow-x: hidden;
+            background: #0a0a1a;
+        }
+
+        /* ===================== SCENE 1: SKY & CLOUDS ===================== */
+        .scene-sky {
+            position: relative;
             min-height: 100vh;
+            background: linear-gradient(180deg, #0d1b2a 0%, #1b2838 30%, #2c3e50 60%, #4a6741 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
+            overflow: hidden;
         }
 
-        .container {
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.3); }
+        }
+
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            filter: blur(40px);
+        }
+
+        .cloud-1 {
+            width: 600px; height: 200px;
+            top: 15%; left: -5%;
+            animation: cloudFloat 20s ease-in-out infinite;
+        }
+
+        .cloud-2 {
+            width: 500px; height: 180px;
+            top: 25%; right: -10%;
+            animation: cloudFloat 25s ease-in-out infinite reverse;
+        }
+
+        .cloud-3 {
+            width: 700px; height: 220px;
+            top: 40%; left: 20%;
+            animation: cloudFloat 18s ease-in-out infinite;
+            animation-delay: -5s;
+        }
+
+        .cloud-4 {
+            width: 400px; height: 150px;
+            top: 55%; right: 5%;
+            animation: cloudFloat 22s ease-in-out infinite reverse;
+            animation-delay: -8s;
+        }
+
+        @keyframes cloudFloat {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(30px) translateY(-10px); }
+            50% { transform: translateX(-20px) translateY(15px); }
+            75% { transform: translateX(15px) translateY(-5px); }
+        }
+
+        .fog {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.03) 40%, rgba(200,220,200,0.08) 100%);
+            filter: blur(20px);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
             text-align: center;
             padding: 2rem;
         }
 
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+        .hero-lock {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 2rem;
+            position: relative;
+            animation: floatLock 4s ease-in-out infinite;
         }
 
-        p {
+        .hero-lock svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 30px rgba(100, 200, 255, 0.4));
+        }
+
+        @keyframes floatLock {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #64ffda, #48b1ff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 5s ease-in-out infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            font-weight: 300;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.7;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            animation: bounce 2s ease-in-out infinite;
+            z-index: 10;
+        }
+
+        .scroll-hint span {
+            font-size: 0.8rem;
+            opacity: 0.5;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .scroll-arrow {
+            width: 24px;
+            height: 24px;
+            border-right: 2px solid rgba(255,255,255,0.5);
+            border-bottom: 2px solid rgba(255,255,255,0.5);
+            transform: rotate(45deg);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(12px); }
+        }
+
+        /* ===================== SCENE 2: FOG TRANSITION ===================== */
+        .scene-fog {
+            position: relative;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #4a6741 0%, #2d4a2d 20%, #1a3a1a 50%, #0f2b0f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .fog-layer {
+            position: absolute;
+            width: 200%;
+            height: 100%;
+            top: 0;
+            left: -50%;
+        }
+
+        .fog-layer-1 {
+            background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.06) 0%, transparent 60%);
+            animation: fogDrift 15s ease-in-out infinite;
+        }
+
+        .fog-layer-2 {
+            background: radial-gradient(ellipse at 70% 40%, rgba(255,255,255,0.04) 0%, transparent 50%);
+            animation: fogDrift 20s ease-in-out infinite reverse;
+        }
+
+        .fog-layer-3 {
+            background: radial-gradient(ellipse at 50% 60%, rgba(200,255,200,0.03) 0%, transparent 55%);
+            animation: fogDrift 12s ease-in-out infinite;
+            animation-delay: -4s;
+        }
+
+        @keyframes fogDrift {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10%); }
+        }
+
+        .trees-bg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+        }
+
+        .tree {
+            position: absolute;
+            bottom: 0;
+        }
+
+        .tree svg {
+            height: 100%;
+            fill: #0a1a0a;
+        }
+
+        .fog-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            padding: 2rem;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .info-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .info-card h2 {
+            font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+            color: #64ffda;
+        }
+
+        .info-card p {
+            font-size: clamp(0.95rem, 2vw, 1.15rem);
+            line-height: 1.8;
+            opacity: 0.85;
+            font-weight: 300;
+        }
+
+        .info-card .icon-row {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .icon-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .icon-item svg {
+            width: 20px;
+            height: 20px;
+            fill: #64ffda;
+        }
+
+        /* ===================== SCENE 3: DEEP FOREST ===================== */
+        .scene-forest {
+            position: relative;
+            min-height: 120vh;
+            background: linear-gradient(180deg, #0f2b0f 0%, #0a1f0a 30%, #071507 60%, #050f05 100%);
+            overflow: hidden;
+            padding: 5rem 0;
+        }
+
+        .forest-trees {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .tree-silhouette {
+            position: absolute;
+            bottom: 0;
+            opacity: 0.1;
+        }
+
+        .fireflies {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .firefly {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #aaff77;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 3px rgba(170, 255, 119, 0.4);
+            animation: fireflyFloat 8s ease-in-out infinite;
+        }
+
+        @keyframes fireflyFloat {
+            0%, 100% { opacity: 0; transform: translate(0, 0); }
+            10% { opacity: 1; }
+            50% { opacity: 0.8; transform: translate(30px, -40px); }
+            90% { opacity: 1; }
+        }
+
+        .forest-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(100, 255, 218, 0.03);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .feature-card:hover {
+            background: rgba(100, 255, 218, 0.06);
+            border-color: rgba(100, 255, 218, 0.2);
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1.5rem;
+            background: rgba(100, 255, 218, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: #64ffda;
+        }
+
+        .feature-card h3 {
             font-size: 1.2rem;
-            opacity: 0.9;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: #64ffda;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            opacity: 0.7;
+            font-weight: 300;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .section-title.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transition-delay: 0.2s;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        .section-subtitle.visible {
+            opacity: 0.6;
+            transform: translateY(0);
+        }
+
+        /* ===================== SCENE 4: UNDERGROUND TUNNEL ===================== */
+        .scene-underground-transition {
+            position: relative;
+            height: 50vh;
+            background: linear-gradient(180deg, #050f05 0%, #0a0a0a 30%, #111 50%, #1a1008 100%);
+            overflow: hidden;
+        }
+
+        .roots {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .root {
+            position: absolute;
+            top: 0;
+            background: linear-gradient(180deg, #2a1a0a, #1a0f05);
+            border-radius: 0 0 50% 50%;
+        }
+
+        .ground-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent 0%, #3a2a1a 20%, #5a3a1a 50%, #3a2a1a 80%, transparent 100%);
+        }
+
+        .dirt-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .dirt-particle {
+            position: absolute;
+            background: rgba(139, 90, 43, 0.15);
+            border-radius: 50%;
+        }
+
+        .scene-underground {
+            position: relative;
+            min-height: 120vh;
+            background: linear-gradient(180deg, #1a1008 0%, #0f0a05 30%, #0d0800 50%, #1a0f08 100%);
+            overflow: hidden;
+            padding: 5rem 0;
+        }
+
+        .cave-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .cave-glow-1 {
+            width: 400px; height: 400px;
+            top: 10%; left: -5%;
+            background: rgba(255, 140, 0, 0.04);
+            animation: caveGlow 8s ease-in-out infinite;
+        }
+
+        .cave-glow-2 {
+            width: 500px; height: 500px;
+            top: 40%; right: -10%;
+            background: rgba(255, 100, 50, 0.03);
+            animation: caveGlow 10s ease-in-out infinite reverse;
+        }
+
+        .cave-glow-3 {
+            width: 300px; height: 300px;
+            bottom: 10%; left: 30%;
+            background: rgba(255, 200, 100, 0.04);
+            animation: caveGlow 6s ease-in-out infinite;
+            animation-delay: -3s;
+        }
+
+        @keyframes caveGlow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .crystal {
+            position: absolute;
+            width: 6px;
+            border-radius: 2px 2px 0 0;
+            animation: crystalGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes crystalGlow {
+            0%, 100% { opacity: 0.3; box-shadow: 0 0 5px currentColor; }
+            50% { opacity: 0.8; box-shadow: 0 0 15px currentColor; }
+        }
+
+        .underground-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .tunnel-card {
+            background: rgba(255, 140, 0, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 140, 0, 0.1);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateX(-80px) rotate(-2deg);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .tunnel-card:nth-child(even) {
+            transform: translateX(80px) rotate(2deg);
+        }
+
+        .tunnel-card.visible {
+            opacity: 1;
+            transform: translateX(0) rotate(0);
+        }
+
+        .tunnel-card h2 {
+            font-size: clamp(1.4rem, 3vw, 1.8rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #ffb347;
+        }
+
+        .tunnel-card p {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            line-height: 1.8;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+
+        .tunnel-card .highlight {
+            color: #ffb347;
+            font-weight: 600;
+        }
+
+        .tunnel-card ul {
+            list-style: none;
+            margin-top: 1.2rem;
+        }
+
+        .tunnel-card ul li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.95rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .tunnel-card ul li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: #ffb347;
+            font-size: 0.6rem;
+            top: 0.7rem;
+        }
+
+        /* ===================== SCENE 5: DEEP CORE ===================== */
+        .scene-core {
+            position: relative;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #1a0f08 0%, #0a0505 50%, #0a0a1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .core-pulse {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(100, 200, 255, 0.08) 0%, transparent 70%);
+            animation: corePulse 4s ease-in-out infinite;
+        }
+
+        @keyframes corePulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+        }
+
+        .core-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 1px solid rgba(100, 200, 255, 0.1);
+            animation: ringExpand 6s ease-in-out infinite;
+        }
+
+        .core-ring:nth-child(2) { animation-delay: -2s; }
+        .core-ring:nth-child(3) { animation-delay: -4s; }
+
+        @keyframes ringExpand {
+            0% { width: 100px; height: 100px; opacity: 0.8; }
+            100% { width: 600px; height: 600px; opacity: 0; }
+        }
+
+        .core-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .final-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffb347, #ff6b6b, #64ffda, #48b1ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 300% 300%;
+            animation: gradientShift 4s ease-in-out infinite;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .final-title.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .final-text {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.8;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transition-delay: 0.3s;
+            font-weight: 300;
+        }
+
+        .final-text.visible {
+            opacity: 0.7;
+            transform: translateY(0);
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .stat.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-number {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            color: #64ffda;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.3rem;
+        }
+
+        /* ===================== PARALLAX SCROLL EFFECTS ===================== */
+        .parallax-layer {
+            transition: transform 0.1s linear;
+            will-change: transform;
+        }
+
+        /* ===================== PROGRESS BAR ===================== */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #64ffda, #48b1ff, #a78bfa, #ffb347);
+            z-index: 1000;
+            transform-origin: left;
+            transform: scaleX(0);
+            transition: transform 0.1s linear;
+        }
+
+        /* ===================== NAV DOTS ===================== */
+        .nav-dots {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-dot.active {
+            background: #64ffda;
+            border-color: #64ffda;
+            box-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
+        }
+
+        .nav-dot::after {
+            content: attr(data-label);
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            white-space: nowrap;
+            font-size: 0.7rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: rgba(255,255,255,0.7);
+            pointer-events: none;
+        }
+
+        .nav-dot:hover::after {
+            opacity: 1;
+        }
+
+        /* ===================== MOBILE ===================== */
+        @media (max-width: 768px) {
+            .nav-dots { display: none; }
+            .info-card, .tunnel-card { padding: 2rem 1.5rem; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .stats-row { gap: 2rem; }
+        }
+
+        /* ===================== TEXT REVEAL ===================== */
+        .text-reveal {
+            overflow: hidden;
+        }
+
+        .text-reveal span {
+            display: inline-block;
+            transform: translateY(100%);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .text-reveal.visible span {
+            transform: translateY(0);
+        }
+
+        /* ===================== VPN TUNNEL VISUALIZATION ===================== */
+        .vpn-tunnel-viz {
+            position: relative;
+            height: 200px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .tunnel-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.3), transparent);
+        }
+
+        .data-packet {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            background: #64ffda;
+            border-radius: 3px;
+            box-shadow: 0 0 15px rgba(100, 255, 218, 0.6);
+            animation: packetMove 3s linear infinite;
+        }
+
+        @keyframes packetMove {
+            0% { left: -20px; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: calc(100% + 20px); opacity: 0; }
+        }
+
+        .packet-2 { animation-delay: -1s; top: 40%; }
+        .packet-3 { animation-delay: -2s; top: 60%; }
+
+        .tunnel-encrypt {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            border: 2px solid rgba(100, 255, 218, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: encryptPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes encryptPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(100, 255, 218, 0.1); }
+            50% { box-shadow: 0 0 40px rgba(100, 255, 218, 0.3); }
+        }
+
+        .tunnel-encrypt svg {
+            width: 30px;
+            height: 30px;
+            fill: #64ffda;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Салам! Мен Улан Махмараимов</h1>
-        <p>Менин жеке веб-сайтыма кош келиңиз.</p>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Nav Dots -->
+    <div class="nav-dots">
+        <div class="nav-dot active" data-label="Асман" data-target="sky"></div>
+        <div class="nav-dot" data-label="Туман" data-target="fog"></div>
+        <div class="nav-dot" data-label="Токой" data-target="forest"></div>
+        <div class="nav-dot" data-label="Жер астында" data-target="underground"></div>
+        <div class="nav-dot" data-label="Өзөк" data-target="core"></div>
     </div>
+
+    <!-- ===== SCENE 1: SKY ===== -->
+    <section class="scene-sky" id="sky">
+        <div class="stars" id="stars"></div>
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+        <div class="cloud cloud-4"></div>
+        <div class="fog"></div>
+
+        <div class="hero-content">
+            <div class="hero-lock">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 1C8.676 1 6 3.676 6 7v3H5c-1.1 0-2 .9-2 2v9c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-9c0-1.1-.9-2-2-2h-1V7c0-3.324-2.676-6-6-6zm0 2c2.276 0 4 1.724 4 4v3H8V7c0-2.276 1.724-4 4-4zm0 11c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z" fill="#64ffda"/>
+                </svg>
+            </div>
+            <h1 class="hero-title">VPN деген эмне?</h1>
+            <p class="hero-subtitle">
+                Virtual Private Network — бул интернеттеги сиздин жашыруун тоннелиңиз.
+                Маалыматтарыңызды коргоп, эркиндигиңизди камсыз кылат.
+            </p>
+        </div>
+
+        <div class="scroll-hint">
+            <span>Ылдый жылдыр</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- ===== SCENE 2: FOG / FOREST ENTRY ===== -->
+    <section class="scene-fog" id="fog">
+        <div class="fog-layer fog-layer-1"></div>
+        <div class="fog-layer fog-layer-2"></div>
+        <div class="fog-layer fog-layer-3"></div>
+
+        <div class="fog-content">
+            <div class="info-card" data-animate>
+                <h2>🌐 VPN кантип иштейт?</h2>
+                <p>
+                    VPN сиздин түзмөгүңүз менен интернеттин ортосунда <strong>шифрленген тоннель</strong> түзөт.
+                    Бул тоннель аркылуу бардык маалыматтарыңыз коопсуз өтөт — тышкы адамдар аны окуй алышпайт.
+                </p>
+
+                <!-- VPN Tunnel Visualization -->
+                <div class="vpn-tunnel-viz">
+                    <div class="tunnel-line"></div>
+                    <div class="data-packet"></div>
+                    <div class="data-packet packet-2"></div>
+                    <div class="data-packet packet-3"></div>
+                    <div class="tunnel-encrypt">
+                        <svg viewBox="0 0 24 24"><path d="M12 1C8.676 1 6 3.676 6 7v3H5c-1.1 0-2 .9-2 2v9c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-9c0-1.1-.9-2-2-2h-1V7c0-3.324-2.676-6-6-6zm0 2c2.276 0 4 1.724 4 4v3H8V7c0-2.276 1.724-4 4-4zm0 11c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"/></svg>
+                    </div>
+                </div>
+
+                <div class="icon-row">
+                    <div class="icon-item">
+                        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+                        <span>Шифрлөө</span>
+                    </div>
+                    <div class="icon-item">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        <span>Анонимдүүлүк</span>
+                    </div>
+                    <div class="icon-item">
+                        <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+                        <span>Коргоо</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card" data-animate>
+                <h2>🔒 Эмне үчүн VPN керек?</h2>
+                <p>
+                    Жалпы Wi-Fi тармагында отурганыңызды элестетиңиз — хакерлер сиздин маалыматтарыңызды
+                    оңой эле кармай алышат. VPN бул коркунучтан толугу менен коргойт. Сиздин чыныгы
+                    IP дарегиңизди жашырып, маалыматтарыңызды шифрлейт.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SCENE 3: DEEP FOREST ===== -->
+    <section class="scene-forest" id="forest">
+        <div class="fireflies" id="fireflies"></div>
+
+        <div class="forest-content">
+            <h2 class="section-title" data-animate style="color: #64ffda;">VPN нин мүмкүнчүлүктөрү</h2>
+            <p class="section-subtitle" data-animate>Жашыруун токойдун тереңинде — маалыматтарыңыз коопсуз</p>
+
+            <div class="feature-grid">
+                <div class="feature-card" data-animate>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                    </div>
+                    <h3>IP дарегин жашыруу</h3>
+                    <p>Сиздин чыныгы жайгашкан жериңиз жашырылат. Интернетте анонимдүү болосуз.</p>
+                </div>
+
+                <div class="feature-card" data-animate>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                    </div>
+                    <h3>Маалыматтарды шифрлөө</h3>
+                    <p>AES-256 шифрлөө менен маалыматтарыңыз бузулгус болот. Эң күчтүү коргоо.</p>
+                </div>
+
+                <div class="feature-card" data-animate>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                    </div>
+                    <h3>Географиялык эркиндик</h3>
+                    <p>Бөгөттөлгөн сайттарга кирүү. Каалаган өлкөдөн интернетке чыгыңыз.</p>
+                </div>
+
+                <div class="feature-card" data-animate>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+                    </div>
+                    <h3>Коопсуз Wi-Fi</h3>
+                    <p>Ачык Wi-Fi тармактарда коопсуз серептеңиз. Хакерлерден корголуңуз.</p>
+                </div>
+
+                <div class="feature-card" data-animate>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
+                    </div>
+                    <h3>Журнал жазбоо</h3>
+                    <p>Мыкты VPN кызматтары сиздин аракеттериңизди жазып албайт. Толук купуялуулук.</p>
+                </div>
+
+                <div class="feature-card" data-animate>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M20.38 8.57l-1.23 1.85a8 8 0 0 1-.22 7.58H5.07A8 8 0 0 1 15.58 6.85l1.85-1.23A10 10 0 0 0 3.35 19a2 2 0 0 0 1.72 1h13.85a2 2 0 0 0 1.74-1 10 10 0 0 0-.27-10.44zm-9.79 6.84a2 2 0 0 0 2.83 0l5.66-8.49-8.49 5.66a2 2 0 0 0 0 2.83z"/></svg>
+                    </div>
+                    <h3>Ылдамдык</h3>
+                    <p>Заманбап VPN протоколдору ылдамдыкты дээрлик азайтпайт. Тез жана коопсуз.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SCENE 4: UNDERGROUND TRANSITION ===== -->
+    <section class="scene-underground-transition">
+        <div class="ground-line"></div>
+        <div class="roots" id="roots"></div>
+        <div class="dirt-particles" id="dirtParticles"></div>
+    </section>
+
+    <!-- ===== SCENE 4: UNDERGROUND ===== -->
+    <section class="scene-underground" id="underground">
+        <div class="cave-glow cave-glow-1"></div>
+        <div class="cave-glow cave-glow-2"></div>
+        <div class="cave-glow cave-glow-3"></div>
+        <div id="crystals"></div>
+
+        <div class="underground-content">
+            <h2 class="section-title" data-animate style="color: #ffb347;">Жер астында — VPN протоколдору</h2>
+            <p class="section-subtitle" data-animate>Тереңде жашыруун маалымат — VPN кантип курулган</p>
+
+            <div class="tunnel-card" data-animate>
+                <h2>⚡ OpenVPN</h2>
+                <p>
+                    Эң популярдуу жана ишенимдүү VPN протоколу. Ачык баштапкы коду бар,
+                    коомчулук тарабынан текшерилген. <span class="highlight">TCP жана UDP</span> режимдерин колдойт.
+                </p>
+                <ul>
+                    <li>AES-256-GCM шифрлөө</li>
+                    <li>Бардык платформаларды колдойт</li>
+                    <li>Файрволлорду айланып өтө алат</li>
+                </ul>
+            </div>
+
+            <div class="tunnel-card" data-animate>
+                <h2>🚀 WireGuard</h2>
+                <p>
+                    Жаңы муундагы VPN протоколу. Абдан ылдам жана жеңил — коду болгону
+                    <span class="highlight">4,000 сап</span>, ал OpenVPN дики 100,000+ сап.
+                </p>
+                <ul>
+                    <li>ChaCha20 шифрлөө</li>
+                    <li>Өтө ылдам туташуу</li>
+                    <li>Linux ядросуна интеграцияланган</li>
+                </ul>
+            </div>
+
+            <div class="tunnel-card" data-animate>
+                <h2>🔐 IKEv2/IPSec</h2>
+                <p>
+                    Мобилдик түзмөктөр үчүн идеалдуу. Тармакты алмаштырганда
+                    (<span class="highlight">Wi-Fi → 4G</span>) туташуу үзүлбөйт.
+                </p>
+                <ul>
+                    <li>Автоматтык кайра туташуу</li>
+                    <li>Мобилдик оптималдаштыруу</li>
+                    <li>Microsoft жана Cisco тарабынан түзүлгөн</li>
+                </ul>
+            </div>
+
+            <div class="tunnel-card" data-animate>
+                <h2>🛡️ Коопсуздук кеңештери</h2>
+                <p>VPN колдонууда эске алуу керек болгон маанилүү жагдайлар:</p>
+                <ul>
+                    <li>Акысыз VPN кызматтарына ишенбеңиз — алар маалыматтарыңызды сатышы мүмкүн</li>
+                    <li>Kill Switch функциясы бар VPN тандаңыз</li>
+                    <li>DNS агып кетүүсүн текшериңиз</li>
+                    <li>"Журнал жазбоо" саясаты бар кызматты тандаңыз</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SCENE 5: CORE ===== -->
+    <section class="scene-core" id="core">
+        <div class="core-pulse"></div>
+        <div class="core-ring"></div>
+        <div class="core-ring"></div>
+        <div class="core-ring"></div>
+
+        <div class="core-content">
+            <h2 class="final-title" data-animate>Купуялуулук — бул укук</h2>
+            <p class="final-text" data-animate>
+                VPN — бул жөн эле технология эмес, бул санариптик дүйнөдөгү
+                эркиндигиңиздин жана купуялуулугуңуздун кепилдиги.
+            </p>
+            <div class="stats-row">
+                <div class="stat" data-animate>
+                    <span class="stat-number" data-count="1500">0</span>
+                    <span class="stat-label">Миллион колдонуучу</span>
+                </div>
+                <div class="stat" data-animate>
+                    <span class="stat-number" data-count="195">0</span>
+                    <span class="stat-label">Өлкөдө жеткиликтүү</span>
+                </div>
+                <div class="stat" data-animate>
+                    <span class="stat-number" data-count="256">0</span>
+                    <span class="stat-label">Бит шифрлөө</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Generate stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 80; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 3 + 1;
+            star.style.cssText = `
+                width: ${size}px; height: ${size}px;
+                top: ${Math.random() * 100}%;
+                left: ${Math.random() * 100}%;
+                animation-delay: ${Math.random() * 3}s;
+                animation-duration: ${2 + Math.random() * 3}s;
+            `;
+            starsContainer.appendChild(star);
+        }
+
+        // Generate fireflies
+        const firefliesContainer = document.getElementById('fireflies');
+        for (let i = 0; i < 20; i++) {
+            const firefly = document.createElement('div');
+            firefly.className = 'firefly';
+            firefly.style.cssText = `
+                top: ${20 + Math.random() * 60}%;
+                left: ${Math.random() * 100}%;
+                animation-delay: ${Math.random() * 8}s;
+                animation-duration: ${5 + Math.random() * 6}s;
+            `;
+            firefliesContainer.appendChild(firefly);
+        }
+
+        // Generate roots
+        const rootsContainer = document.getElementById('roots');
+        for (let i = 0; i < 12; i++) {
+            const root = document.createElement('div');
+            root.className = 'root';
+            const width = 3 + Math.random() * 8;
+            const height = 30 + Math.random() * 70;
+            root.style.cssText = `
+                left: ${5 + Math.random() * 90}%;
+                width: ${width}px;
+                height: ${height}%;
+                opacity: ${0.2 + Math.random() * 0.3};
+                transform: rotate(${-5 + Math.random() * 10}deg);
+            `;
+            rootsContainer.appendChild(root);
+        }
+
+        // Generate dirt particles
+        const dirtContainer = document.getElementById('dirtParticles');
+        for (let i = 0; i < 40; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'dirt-particle';
+            const size = 2 + Math.random() * 6;
+            particle.style.cssText = `
+                width: ${size}px; height: ${size}px;
+                top: ${Math.random() * 100}%;
+                left: ${Math.random() * 100}%;
+            `;
+            dirtContainer.appendChild(particle);
+        }
+
+        // Generate crystals
+        const crystalsContainer = document.getElementById('crystals');
+        const crystalColors = ['#ff6b6b', '#64ffda', '#ffb347', '#a78bfa', '#48b1ff'];
+        for (let i = 0; i < 15; i++) {
+            const crystal = document.createElement('div');
+            crystal.className = 'crystal';
+            const height = 15 + Math.random() * 30;
+            const color = crystalColors[Math.floor(Math.random() * crystalColors.length)];
+            crystal.style.cssText = `
+                height: ${height}px;
+                background: ${color};
+                color: ${color};
+                ${Math.random() > 0.5 ? 'bottom' : 'top'}: ${Math.random() * 30}%;
+                left: ${Math.random() * 100}%;
+                animation-delay: ${Math.random() * 4}s;
+                transform: rotate(${-15 + Math.random() * 30}deg);
+            `;
+            crystalsContainer.appendChild(crystal);
+        }
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.dataset.delay || 0;
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, delay);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('[data-animate]').forEach((el, i) => {
+            const parent = el.closest('.feature-grid');
+            if (parent) {
+                const siblings = Array.from(parent.querySelectorAll('[data-animate]'));
+                el.dataset.delay = siblings.indexOf(el) * 150;
+            }
+            observer.observe(el);
+        });
+
+        // Scroll progress bar
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = scrollTop / docHeight;
+            document.getElementById('scrollProgress').style.transform = `scaleX(${scrollPercent})`;
+        });
+
+        // Nav dots
+        const sections = ['sky', 'fog', 'forest', 'underground', 'core'];
+        const navDots = document.querySelectorAll('.nav-dot');
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    navDots.forEach(dot => {
+                        dot.classList.toggle('active', dot.dataset.target === id);
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+
+        sections.forEach(id => {
+            const section = document.getElementById(id);
+            if (section) sectionObserver.observe(section);
+        });
+
+        navDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const target = document.getElementById(dot.dataset.target);
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Animated counters
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseInt(el.dataset.count);
+                    const duration = 2000;
+                    const start = performance.now();
+
+                    function update(now) {
+                        const elapsed = now - start;
+                        const progress = Math.min(elapsed / duration, 1);
+                        const eased = 1 - Math.pow(1 - progress, 3);
+                        el.textContent = Math.floor(target * eased).toLocaleString() + '+';
+                        if (progress < 1) requestAnimationFrame(update);
+                    }
+
+                    requestAnimationFrame(update);
+                    counterObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('[data-count]').forEach(el => {
+            counterObserver.observe(el);
+        });
+
+        // Parallax on scroll
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    const scrollY = window.scrollY;
+                    const clouds = document.querySelectorAll('.cloud');
+                    clouds.forEach((cloud, i) => {
+                        const speed = 0.1 + i * 0.05;
+                        cloud.style.transform = `translateY(${scrollY * speed}px)`;
+                    });
+
+                    const fogLayers = document.querySelectorAll('.fog-layer');
+                    fogLayers.forEach((layer, i) => {
+                        const offset = scrollY - layer.closest('section').offsetTop;
+                        layer.style.transform = `translateX(${offset * (0.02 + i * 0.01)}px)`;
+                    });
+
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+    </script>
 </body>
 </html>

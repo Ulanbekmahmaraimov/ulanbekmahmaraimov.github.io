@@ -5,42 +5,999 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Улан Махмараимов</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a1a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        #canvas-container canvas {
+            display: block;
+        }
+
+        .scroll-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .section {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-        }
-
-        .container {
-            text-align: center;
+            position: relative;
             padding: 2rem;
         }
 
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+        .hero-section {
+            min-height: 100vh;
+            perspective: 1000px;
         }
 
-        p {
-            font-size: 1.2rem;
+        .hero-text {
+            text-align: center;
+            transform-style: preserve-3d;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            text-shadow: 0 0 40px rgba(100, 200, 255, 0.5), 0 0 80px rgba(100, 200, 255, 0.2);
+            background: linear-gradient(135deg, #ffffff 0%, #88ccff 50%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text .subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            font-weight: 300;
+            margin-top: 1rem;
+            opacity: 0.8;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(100, 200, 255, 0.3);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator .arrow {
+            width: 30px;
+            height: 30px;
+            border-right: 2px solid rgba(255,255,255,0.5);
+            border-bottom: 2px solid rgba(255,255,255,0.5);
+            transform: rotate(45deg);
+            margin: 0 auto;
+        }
+
+        .scroll-indicator p {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            opacity: 0.5;
+            margin-top: 0.5rem;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(60px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .floating-text {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(80px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .floating-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .text-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 3rem;
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
+        }
+
+        .text-card:hover {
+            transform: translateZ(20px) rotateX(2deg) rotateY(-2deg);
+            border-color: rgba(100, 200, 255, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 40px rgba(100, 200, 255, 0.1);
+        }
+
+        .text-card h2 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #64c8ff 0%, #c8a0ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .text-card p {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            line-height: 1.8;
+            opacity: 0.75;
+            font-weight: 300;
+        }
+
+        .text-card .tag {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            margin: 0.3rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.05);
+            letter-spacing: 0.05em;
+        }
+
+        .tags-container {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+        }
+
+        .section-left {
+            justify-content: flex-start;
+            padding-left: 8%;
+        }
+
+        .section-right {
+            justify-content: flex-end;
+            padding-right: 8%;
+        }
+
+        .parallax-text {
+            position: absolute;
+            font-size: clamp(3rem, 15vw, 12rem);
+            font-weight: 900;
+            opacity: 0.03;
+            white-space: nowrap;
+            pointer-events: none;
+            letter-spacing: -0.05em;
+        }
+
+        .quote-section {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .quote-section blockquote {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
             opacity: 0.9;
+            text-shadow: 0 0 30px rgba(100, 200, 255, 0.2);
+        }
+
+        .quote-section .author {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            opacity: 0.5;
+            letter-spacing: 0.2em;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.4s ease;
+        }
+
+        .stat-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-5px);
+            border-color: rgba(100, 200, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #64c8ff 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.6;
+            margin-top: 0.5rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .timeline {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            padding-bottom: 2.5rem;
+            border-left: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #64c8ff;
+            box-shadow: 0 0 15px rgba(100, 200, 255, 0.5);
+        }
+
+        .timeline-item .year {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            opacity: 0.5;
+            text-transform: uppercase;
+        }
+
+        .timeline-item h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0.3rem 0;
+        }
+
+        .timeline-item p {
+            font-size: 0.9rem;
+            opacity: 0.6;
+            line-height: 1.6;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .contact-link {
+            padding: 0.8rem 2rem;
+            border-radius: 100px;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.03);
+        }
+
+        .contact-link:hover {
+            background: rgba(100, 200, 255, 0.15);
+            border-color: rgba(100, 200, 255, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .footer-section {
+            min-height: 50vh;
+            text-align: center;
+        }
+
+        .footer-section h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 0%, #64c8ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-section p {
+            opacity: 0.5;
+            font-size: 0.85rem;
+            margin-top: 3rem;
+            letter-spacing: 0.1em;
+        }
+
+        .skill-bars {
+            width: 100%;
+            max-width: 500px;
+            margin-top: 2rem;
+        }
+
+        .skill-bar {
+            margin-bottom: 1.2rem;
+        }
+
+        .skill-bar .label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .skill-bar .label span:first-child {
+            font-weight: 600;
+        }
+
+        .skill-bar .label span:last-child {
+            opacity: 0.5;
+        }
+
+        .skill-bar .bar {
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-bar .fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #64c8ff, #a78bfa);
+            width: 0%;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .text-reveal {
+            overflow: hidden;
+        }
+
+        .text-reveal span {
+            display: inline-block;
+            transform: translateY(100%);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .text-reveal.visible span {
+            transform: translateY(0);
+        }
+
+        .glow-line {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #64c8ff, transparent);
+            margin: 2rem auto;
+        }
+
+        @media (max-width: 768px) {
+            .section-left, .section-right {
+                justify-content: center;
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+
+            .text-card {
+                padding: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Салам! Мен Улан Махмараимов</h1>
-        <p>Менин жеке веб-сайтыма кош келиңиз.</p>
+    <div id="canvas-container"></div>
+
+    <div class="scroll-content">
+        <!-- Hero Section -->
+        <section class="section hero-section" id="hero">
+            <div class="hero-text">
+                <h1>Улан Махмараимов</h1>
+                <div class="subtitle">Программист • Түзүүчү • Иштеп чыгуучу</div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="arrow"></div>
+                <p>ЫЛДЫЙ ЖЫЛДЫР</p>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="section section-left" id="about">
+            <div class="parallax-text" data-speed="0.1" style="top: 10%; left: -5%;">МЕНИН ЖӨНҮНДӨ</div>
+            <div class="floating-text">
+                <div class="text-card">
+                    <h2>Менин жөнүндө</h2>
+                    <p>
+                        Мен — технологиялар дүйнөсүндө жашаган жана иштеген программист.
+                        Веб-тиркемелерди, мобилдик тиркемелерди жана заманбап программалык камсыздоону иштеп чыгуу менин кесибим.
+                        Ар дайым жаңы нерселерди үйрөнүүгө жана өзүмдү өнүктүрүүгө умтулам.
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        Кыргызстандан чыккан, дүйнөлүк деңгээлдеги технологияларды колдонгон иштеп чыгуучумун.
+                        Менин максатым — заманбап жана пайдалуу продукттарды түзүү.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quote -->
+        <section class="section quote-section">
+            <div class="floating-text">
+                <blockquote>
+                    «Программалоо — бул искусство. Ар бир код сабы — чыгармачылыктын бир бөлүгү.»
+                </blockquote>
+                <div class="author">— УЛАН МАХМАРАИМОВ</div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="section section-right" id="skills">
+            <div class="parallax-text" data-speed="-0.15" style="top: 20%; right: -5%;">КӨНДҮМДӨР</div>
+            <div class="floating-text">
+                <div class="text-card">
+                    <h2>Көндүмдөрүм</h2>
+                    <p>Мен ар кандай технологиялар менен иштейм жана ар дайым жаңы инструменттерди өздөштүрөм.</p>
+                    <div class="skill-bars">
+                        <div class="skill-bar">
+                            <div class="label"><span>JavaScript / TypeScript</span><span>90%</span></div>
+                            <div class="bar"><div class="fill" data-width="90"></div></div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="label"><span>Python</span><span>85%</span></div>
+                            <div class="bar"><div class="fill" data-width="85"></div></div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="label"><span>React / Next.js</span><span>88%</span></div>
+                            <div class="bar"><div class="fill" data-width="88"></div></div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="label"><span>Node.js</span><span>82%</span></div>
+                            <div class="bar"><div class="fill" data-width="82"></div></div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="label"><span>HTML / CSS</span><span>95%</span></div>
+                            <div class="bar"><div class="fill" data-width="95"></div></div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="label"><span>SQL / Databases</span><span>78%</span></div>
+                            <div class="bar"><div class="fill" data-width="78"></div></div>
+                        </div>
+                    </div>
+                    <div class="tags-container">
+                        <span class="tag">Git</span>
+                        <span class="tag">Docker</span>
+                        <span class="tag">AWS</span>
+                        <span class="tag">Linux</span>
+                        <span class="tag">REST API</span>
+                        <span class="tag">GraphQL</span>
+                        <span class="tag">MongoDB</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">Redis</span>
+                        <span class="tag">CI/CD</span>
+                        <span class="tag">Figma</span>
+                        <span class="tag">Three.js</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="section" id="stats">
+            <div class="floating-text">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="50">0</div>
+                        <div class="stat-label">Долбоорлор</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="10000">0</div>
+                        <div class="stat-label">Код саптары</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="5">0</div>
+                        <div class="stat-label">Жыл тажрыйба</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="20">0</div>
+                        <div class="stat-label">Технологиялар</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quote 2 -->
+        <section class="section quote-section">
+            <div class="floating-text">
+                <div class="glow-line"></div>
+                <blockquote>
+                    «Технология дүйнөнү өзгөртөт, биз болсо технологияны өзгөртөбүз.»
+                </blockquote>
+                <div class="author">— КЕЛЕЧЕК ҮЧҮН ИШТЕЙБИЗ</div>
+                <div class="glow-line"></div>
+            </div>
+        </section>
+
+        <!-- Experience Timeline -->
+        <section class="section section-left" id="experience">
+            <div class="parallax-text" data-speed="0.12" style="top: 15%; left: -10%;">ТАЖРЫЙБА</div>
+            <div class="floating-text">
+                <div class="text-card">
+                    <h2>Тажрыйбам</h2>
+                    <div class="timeline" style="margin-top: 1.5rem;">
+                        <div class="timeline-item">
+                            <div class="year">2024 — Азыр</div>
+                            <h3>Full-Stack Иштеп Чыгуучу</h3>
+                            <p>Заманбап веб-тиркемелерди иштеп чыгуу, API дизайн, маалымат базалары менен иштөө.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="year">2023 — 2024</div>
+                            <h3>Frontend Иштеп Чыгуучу</h3>
+                            <p>React жана Next.js менен татаал UI компоненттерин жана интерактивдүү интерфейстерди түзүү.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="year">2022 — 2023</div>
+                            <h3>Junior Программист</h3>
+                            <p>Программалоонун негиздерин үйрөнүү, алгашкы долбоорлорду ишке ашыруу, командалык иш.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="year">2021 — 2022</div>
+                            <h3>Окуу жана Өнүгүү</h3>
+                            <p>Компьютердик илимдерди окуу, онлайн курстар, хакатондорго катышуу.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="section section-right" id="projects">
+            <div class="parallax-text" data-speed="-0.1" style="top: 5%; right: -5%;">ДОЛБООРЛОР</div>
+            <div class="floating-text">
+                <div class="text-card">
+                    <h2>Долбоорлорум</h2>
+                    <p>Мен иштеп чыккан кээ бир долбоорлор:</p>
+                    <div style="margin-top: 1.5rem;">
+                        <div style="padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
+                            <h3 style="font-size: 1.1rem; font-weight: 600;">🌐 Веб-платформа</h3>
+                            <p style="font-size: 0.85rem; opacity: 0.6; margin-top: 0.3rem;">Толук функционалдуу веб-тиркеме — React, Node.js, MongoDB</p>
+                        </div>
+                        <div style="padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
+                            <h3 style="font-size: 1.1rem; font-weight: 600;">📱 Мобилдик тиркеме</h3>
+                            <p style="font-size: 0.85rem; opacity: 0.6; margin-top: 0.3rem;">Cross-platform мобилдик тиркеме — React Native</p>
+                        </div>
+                        <div style="padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
+                            <h3 style="font-size: 1.1rem; font-weight: 600;">🤖 AI Бот</h3>
+                            <p style="font-size: 0.85rem; opacity: 0.6; margin-top: 0.3rem;">Жасалма интеллект менен иштеген чат-бот — Python, NLP</p>
+                        </div>
+                        <div style="padding: 1rem 0;">
+                            <h3 style="font-size: 1.1rem; font-weight: 600;">📊 Аналитика Dashboard</h3>
+                            <p style="font-size: 0.85rem; opacity: 0.6; margin-top: 0.3rem;">Маалыматтарды визуализациялоо панели — D3.js, PostgreSQL</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Philosophy -->
+        <section class="section quote-section">
+            <div class="floating-text">
+                <div class="glow-line"></div>
+                <blockquote>
+                    «Жакшы код — бул поэзия сыяктуу. Кыска, так жана сулуу.»
+                </blockquote>
+                <div class="author">— КОД ФИЛОСОФИЯСЫ</div>
+                <div class="glow-line"></div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="section" id="values">
+            <div class="floating-text">
+                <div class="text-card" style="text-align: center;">
+                    <h2>Менин Баалуулуктарым</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+                        <div style="padding: 1.5rem;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">💡</div>
+                            <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Инновация</h3>
+                            <p style="font-size: 0.8rem; opacity: 0.6;">Ар дайым жаңы чечимдерди издөө жана колдонуу.</p>
+                        </div>
+                        <div style="padding: 1.5rem;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎯</div>
+                            <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Сапат</h3>
+                            <p style="font-size: 0.8rem; opacity: 0.6;">Жогорку сапаттагы код жана продукт түзүү.</p>
+                        </div>
+                        <div style="padding: 1.5rem;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🤝</div>
+                            <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Кызматташтык</h3>
+                            <p style="font-size: 0.8rem; opacity: 0.6;">Команда менен биргеликте иштөө.</p>
+                        </div>
+                        <div style="padding: 1.5rem;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📚</div>
+                            <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Үйрөнүү</h3>
+                            <p style="font-size: 0.8rem; opacity: 0.6;">Тынымсыз өнүгүү жана билим алуу.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact / Footer -->
+        <section class="section footer-section" id="contact">
+            <div class="floating-text" style="text-align: center;">
+                <h2>Байланышалы</h2>
+                <p style="opacity: 0.7; font-size: 1rem; letter-spacing: 0; margin-top: 0; margin-bottom: 2rem;">
+                    Долбоорлор, идеялар же жөн гана салам айтуу үчүн — мага жазыңыз!
+                </p>
+                <div class="contact-links">
+                    <a href="https://github.com/ulanbekmahmaraimov" class="contact-link" target="_blank">GitHub</a>
+                    <a href="mailto:ulanmahmaraimov@gmail.com" class="contact-link">Email</a>
+                    <a href="#" class="contact-link">LinkedIn</a>
+                    <a href="#" class="contact-link">Telegram</a>
+                </div>
+                <p style="margin-top: 4rem;">&copy; 2024 — 2026 Улан Махмараимов. Бардык укуктар корголгон.</p>
+            </div>
+        </section>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // ==================== THREE.JS 3D SCENE ====================
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 2000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setClearColor(0x0a0a1a, 1);
+        container.appendChild(renderer.domElement);
+
+        scene.fog = new THREE.FogExp2(0x0a0a1a, 0.008);
+
+        // Lights
+        const ambientLight = new THREE.AmbientLight(0x334466, 0.6);
+        scene.add(ambientLight);
+
+        const moonLight = new THREE.DirectionalLight(0x88aacc, 0.8);
+        moonLight.position.set(50, 100, 50);
+        scene.add(moonLight);
+
+        const pointLight1 = new THREE.PointLight(0x64c8ff, 1, 200);
+        pointLight1.position.set(0, 30, 0);
+        scene.add(pointLight1);
+
+        const pointLight2 = new THREE.PointLight(0xa78bfa, 0.5, 150);
+        pointLight2.position.set(-30, 20, -20);
+        scene.add(pointLight2);
+
+        // Tree creation
+        function createTree(x, z, scale) {
+            const group = new THREE.Group();
+
+            // Trunk
+            const trunkGeom = new THREE.CylinderGeometry(0.3 * scale, 0.5 * scale, 4 * scale, 8);
+            const trunkMat = new THREE.MeshPhongMaterial({
+                color: 0x2a1a0a,
+                emissive: 0x0a0500,
+                shininess: 5
+            });
+            const trunk = new THREE.Mesh(trunkGeom, trunkMat);
+            trunk.position.y = 2 * scale;
+            group.add(trunk);
+
+            // Foliage layers
+            const foliageColors = [0x0a3d1a, 0x0d4a20, 0x0f5525, 0x126a2e];
+            for (let i = 0; i < 4; i++) {
+                const radius = (2.5 - i * 0.4) * scale;
+                const height = (2.5 - i * 0.3) * scale;
+                const y = (4 + i * 1.5) * scale;
+                const coneGeom = new THREE.ConeGeometry(radius, height, 8);
+                const coneMat = new THREE.MeshPhongMaterial({
+                    color: foliageColors[i % foliageColors.length],
+                    emissive: 0x001a05,
+                    shininess: 10,
+                    transparent: true,
+                    opacity: 0.9
+                });
+                const cone = new THREE.Mesh(coneGeom, coneMat);
+                cone.position.y = y;
+                cone.rotation.y = Math.random() * Math.PI;
+                group.add(cone);
+            }
+
+            group.position.set(x, -5, z);
+            return group;
+        }
+
+        // Create forest
+        const trees = [];
+        const treePositions = [];
+        for (let i = 0; i < 120; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const radius = 15 + Math.random() * 150;
+            const x = Math.cos(angle) * radius;
+            const z = -Math.random() * 300 - 10;
+            const scale = 0.5 + Math.random() * 1.5;
+
+            let tooClose = false;
+            for (const pos of treePositions) {
+                const dx = pos.x - x;
+                const dz = pos.z - z;
+                if (Math.sqrt(dx * dx + dz * dz) < 4 * scale) {
+                    tooClose = true;
+                    break;
+                }
+            }
+            if (tooClose) continue;
+
+            treePositions.push({ x, z });
+            const tree = createTree(x, z, scale);
+            scene.add(tree);
+            trees.push(tree);
+        }
+
+        // Clouds
+        function createCloud(x, y, z, scale) {
+            const group = new THREE.Group();
+            const cloudMat = new THREE.MeshPhongMaterial({
+                color: 0xffffff,
+                emissive: 0x111122,
+                transparent: true,
+                opacity: 0.15,
+                shininess: 0
+            });
+
+            const numSpheres = 5 + Math.floor(Math.random() * 4);
+            for (let i = 0; i < numSpheres; i++) {
+                const r = (1 + Math.random() * 2) * scale;
+                const geom = new THREE.SphereGeometry(r, 12, 8);
+                const sphere = new THREE.Mesh(geom, cloudMat);
+                sphere.position.set(
+                    (Math.random() - 0.5) * 6 * scale,
+                    (Math.random() - 0.5) * 1.5 * scale,
+                    (Math.random() - 0.5) * 3 * scale
+                );
+                group.add(sphere);
+            }
+
+            group.position.set(x, y, z);
+            return group;
+        }
+
+        const clouds = [];
+        for (let i = 0; i < 30; i++) {
+            const cloud = createCloud(
+                (Math.random() - 0.5) * 200,
+                20 + Math.random() * 40,
+                -Math.random() * 300,
+                1 + Math.random() * 2
+            );
+            scene.add(cloud);
+            clouds.push(cloud);
+        }
+
+        // Particles (fireflies / stars)
+        const particleCount = 500;
+        const particleGeom = new THREE.BufferGeometry();
+        const particlePositions = new Float32Array(particleCount * 3);
+        const particleSizes = new Float32Array(particleCount);
+
+        for (let i = 0; i < particleCount; i++) {
+            particlePositions[i * 3] = (Math.random() - 0.5) * 200;
+            particlePositions[i * 3 + 1] = Math.random() * 60 - 5;
+            particlePositions[i * 3 + 2] = -Math.random() * 300;
+            particleSizes[i] = Math.random() * 2 + 0.5;
+        }
+
+        particleGeom.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+        particleGeom.setAttribute('size', new THREE.BufferAttribute(particleSizes, 1));
+
+        const particleMat = new THREE.PointsMaterial({
+            color: 0x88ddff,
+            size: 0.5,
+            transparent: true,
+            opacity: 0.6,
+            blending: THREE.AdditiveBlending,
+            sizeAttenuation: true
+        });
+
+        const particles = new THREE.Points(particleGeom, particleMat);
+        scene.add(particles);
+
+        // Ground plane
+        const groundGeom = new THREE.PlaneGeometry(400, 600, 50, 50);
+        const groundMat = new THREE.MeshPhongMaterial({
+            color: 0x0a1a0a,
+            emissive: 0x020504,
+            shininess: 0,
+            transparent: true,
+            opacity: 0.8
+        });
+
+        const groundPositions = groundGeom.attributes.position;
+        for (let i = 0; i < groundPositions.count; i++) {
+            groundPositions.setZ(i, (Math.random() - 0.5) * 2);
+        }
+        groundGeom.computeVertexNormals();
+
+        const ground = new THREE.Mesh(groundGeom, groundMat);
+        ground.rotation.x = -Math.PI / 2;
+        ground.position.y = -5;
+        ground.position.z = -150;
+        scene.add(ground);
+
+        // Camera setup
+        camera.position.set(0, 8, 30);
+        camera.lookAt(0, 5, -20);
+
+        // ==================== SCROLL HANDLING ====================
+        let scrollY = 0;
+        let targetScrollY = 0;
+
+        window.addEventListener('scroll', () => {
+            targetScrollY = window.scrollY;
+        });
+
+        // ==================== INTERSECTION OBSERVER ====================
+        const floatingTexts = document.querySelectorAll('.floating-text');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+
+                    const fills = entry.target.querySelectorAll('.fill');
+                    fills.forEach(fill => {
+                        fill.style.width = fill.dataset.width + '%';
+                    });
+
+                    const statNumbers = entry.target.querySelectorAll('.stat-number[data-target]');
+                    statNumbers.forEach(num => {
+                        animateNumber(num, parseInt(num.dataset.target));
+                    });
+                }
+            });
+        }, { threshold: 0.2 });
+
+        floatingTexts.forEach(text => observer.observe(text));
+
+        function animateNumber(el, target) {
+            let current = 0;
+            const increment = target / 60;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                if (target >= 1000) {
+                    el.textContent = Math.floor(current).toLocaleString() + '+';
+                } else {
+                    el.textContent = Math.floor(current) + '+';
+                }
+            }, 25);
+        }
+
+        // ==================== PARALLAX TEXTS ====================
+        const parallaxTexts = document.querySelectorAll('.parallax-text');
+
+        // ==================== ANIMATION LOOP ====================
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const elapsed = clock.getElapsedTime();
+
+            // Smooth scroll
+            scrollY += (targetScrollY - scrollY) * 0.08;
+            const scrollProgress = scrollY / (document.body.scrollHeight - window.innerHeight);
+
+            // Camera movement based on scroll
+            camera.position.z = 30 - scrollProgress * 250;
+            camera.position.y = 8 + Math.sin(scrollProgress * Math.PI) * 15;
+            camera.position.x = Math.sin(scrollProgress * Math.PI * 2) * 20;
+            camera.lookAt(
+                Math.sin(scrollProgress * Math.PI * 2) * 10,
+                5 + Math.sin(scrollProgress * Math.PI) * 5,
+                camera.position.z - 50
+            );
+
+            // Animate clouds
+            clouds.forEach((cloud, i) => {
+                cloud.position.x += Math.sin(elapsed * 0.1 + i) * 0.02;
+                cloud.position.y += Math.cos(elapsed * 0.15 + i) * 0.01;
+                cloud.rotation.y = elapsed * 0.02 + i;
+            });
+
+            // Animate particles
+            const positions = particles.geometry.attributes.position.array;
+            for (let i = 0; i < particleCount; i++) {
+                positions[i * 3 + 1] += Math.sin(elapsed + i) * 0.005;
+                positions[i * 3] += Math.cos(elapsed * 0.5 + i) * 0.003;
+            }
+            particles.geometry.attributes.position.needsUpdate = true;
+
+            // Pulse lights
+            pointLight1.intensity = 1 + Math.sin(elapsed * 0.5) * 0.3;
+            pointLight2.intensity = 0.5 + Math.cos(elapsed * 0.7) * 0.2;
+            pointLight1.position.x = Math.sin(elapsed * 0.3) * 20;
+            pointLight2.position.z = Math.cos(elapsed * 0.2) * 20 - 20;
+
+            // Tree sway
+            trees.forEach((tree, i) => {
+                tree.rotation.z = Math.sin(elapsed * 0.5 + i * 0.5) * 0.02;
+            });
+
+            // Parallax big texts
+            parallaxTexts.forEach(text => {
+                const speed = parseFloat(text.dataset.speed) || 0.1;
+                text.style.transform = `translateY(${scrollY * speed}px)`;
+            });
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // ==================== RESIZE ====================
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
 </body>
 </html>

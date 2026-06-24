@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ky">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VPN — Санариптик Коргоо</title>
+    <title>VPN — Цифровая Защита</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap');
 
@@ -42,10 +42,10 @@
             .navbar-tg { margin: 1rem 2rem; width: fit-content; }
         }
 
-        /* ===== СЕКЦИЯЛАР ===== */
+        /* ===== СЕКЦИИ ===== */
         .section { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 
-        /* ===== ЖЫЛДЫЗДУУ АСМАН (Hero) ===== */
+        /* ===== ЗВЁЗДНОЕ НЕБО (Главная) ===== */
         .sky { background: linear-gradient(180deg, #0f0c29 0%, #302b63 40%, #24243e 100%); min-height: 120vh; padding-top: 80px; }
         .stars { position: absolute; width: 100%; height: 100%; top: 0; left: 0; }
         .star { position: absolute; background: #fff; border-radius: 50%; animation: twinkle 3s infinite alternate; }
@@ -68,7 +68,7 @@
         .scroll-hint .arrow { font-size: 1.5rem; display: block; }
         @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(12px); } }
 
-        /* ===== БУЛУТТАР (VPN деген эмне?) ===== */
+        /* ===== ОБЛАКА (Что такое VPN?) ===== */
         .clouds { background: linear-gradient(180deg, #24243e 0%, #c9d6ff 30%, #e2e2e2 60%, #a8c0a0 100%); min-height: 130vh; }
         .cloud { position: absolute; background: rgba(255, 255, 255, 0.85); border-radius: 100px; filter: blur(2px); }
         .cloud::before, .cloud::after { content: ''; position: absolute; background: inherit; border-radius: 50%; }
@@ -97,7 +97,7 @@
         .simple-explain .analogy h4 { font-size: 1rem; font-weight: 700; color: #1a1a3e; margin-bottom: 0.3rem; }
         .simple-explain .analogy p { font-size: 0.9rem; color: #3a3a5e; line-height: 1.6; }
 
-        /* ===== ТОКОЙ (Мумкунчулуктор) ===== */
+        /* ===== ЛЕС (Возможности) ===== */
         .forest { background: linear-gradient(180deg, #a8c0a0 0%, #2d5a27 20%, #1a3a15 50%, #0d1f0a 100%); min-height: 140vh; flex-direction: column; gap: 2rem; }
         .trees { position: absolute; bottom: 0; width: 100%; height: 100%; overflow: hidden; }
         .tree { position: absolute; bottom: 0; }
@@ -113,7 +113,7 @@
         .vpn-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; color: #a0ffa0; }
         .vpn-card p { font-size: 0.9rem; opacity: 0.8; line-height: 1.6; }
 
-        /* ===== ЖЕР АСТЫНДАГЫ ТУННЕЛЬ (Кантип иштейт) ===== */
+        /* ===== ПОД ЗЕМЛЁЙ (Как работает) ===== */
         .underground { background: linear-gradient(180deg, #0d1f0a 0%, #1a1207 10%, #0f0a05 30%, #050208 100%); min-height: 140vh; flex-direction: column; }
         .roots { position: absolute; top: 0; width: 100%; height: 200px; overflow: hidden; }
         .root { position: absolute; top: 0; width: 4px; background: linear-gradient(180deg, #3d2b1f, transparent); border-radius: 0 0 4px 4px; transform-origin: top center; }
@@ -132,7 +132,7 @@
         .step-text h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.3rem; color: #f7c948; }
         .step-text p { font-size: 0.9rem; opacity: 0.75; line-height: 1.6; }
 
-        /* ===== ТАРИФТЕР ===== */
+        /* ===== ТАРИФЫ ===== */
         .pricing { background: linear-gradient(180deg, #050208 0%, #0a0a2e 50%, #0d0030 100%); min-height: 100vh; flex-direction: column; }
         .pricing-content { z-index: 10; padding: 2rem; max-width: 900px; width: 100%; text-align: center; }
         .pricing-content h2 { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 800; background: linear-gradient(135deg, #f7c948, #ff6b35); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.8rem; }
@@ -151,7 +151,7 @@
         .price-card .card-btn { display: block; margin-top: 1.2rem; padding: 0.7rem 1.5rem; border-radius: 30px; background: linear-gradient(135deg, #0088cc, #00aaee); color: #fff; text-decoration: none; font-weight: 700; font-size: 0.85rem; transition: all 0.3s; text-align: center; }
         .price-card .card-btn:hover { transform: scale(1.05); box-shadow: 0 6px 25px rgba(0,136,204,0.4); }
 
-        /* ===== ПРОТОКОЛДОР ===== */
+        /* ===== ПРОТОКОЛЫ ===== */
         .deep-core { background: linear-gradient(180deg, #0d0030 0%, #0a0020 40%, #050210 100%); min-height: 80vh; }
         .core-glow { position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(100, 0, 255, 0.15) 0%, transparent 70%); animation: coreGlow 4s ease-in-out infinite; }
         @keyframes coreGlow { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.3); opacity: 1; } }
@@ -162,7 +162,7 @@
         .badge { background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.4); border-radius: 30px; padding: 0.5rem 1.2rem; font-size: 0.85rem; font-weight: 600; transition: all 0.3s; }
         .badge:hover { background: rgba(168, 85, 247, 0.3); transform: scale(1.05); }
 
-        /* ===== TELEGRAM БОТ СЕКЦИЯ ===== */
+        /* ===== TELEGRAM БОТ ===== */
         .telegram-section { background: linear-gradient(180deg, #050210 0%, #0a1628 50%, #0d2137 100%); min-height: 70vh; flex-direction: column; }
         .telegram-content { z-index: 10; text-align: center; padding: 2rem; max-width: 650px; }
         .telegram-content h2 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 800; background: linear-gradient(135deg, #0088cc, #00d4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem; }
@@ -186,7 +186,7 @@
         .footer-links a:hover { color: #00f5a0; }
         .footer p { font-size: 0.8rem; opacity: 0.3; }
 
-        /* ===== КАЛКЫП ТУРУУЧУ TELEGRAM БАСКЫЧ ===== */
+        /* ===== ПЛАВАЮЩАЯ КНОПКА TELEGRAM ===== */
         .floating-tg {
             position: fixed; bottom: 28px; right: 28px; z-index: 999;
             width: 60px; height: 60px; border-radius: 50%;
@@ -208,7 +208,7 @@
         }
         .floating-tg:hover .tg-tooltip { opacity: 1; }
 
-        /* ===== АНИМАЦИЯЛАР ===== */
+        /* ===== АНИМАЦИИ ===== */
         .reveal { opacity: 0; transform: translateY(60px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
         .reveal-left { opacity: 0; transform: translateX(-80px); transition: opacity 0.8s ease, transform 0.8s ease; }
@@ -231,251 +231,251 @@
 
     <!-- Навигация -->
     <nav class="navbar" id="navbar">
-        <a href="#sky" class="navbar-logo">VPN Коргоо</a>
+        <a href="#sky" class="navbar-logo">MUB VPN</a>
         <button class="hamburger" id="hamburger" aria-label="Меню">
             <span></span><span></span><span></span>
         </button>
         <div class="navbar-links" id="navLinks">
-            <a href="#clouds">VPN деген эмне?</a>
-            <a href="#forest">Мумкунчулуктор</a>
-            <a href="#underground">Кантип иштейт?</a>
-            <a href="#pricing">Тарифтер</a>
-            <a href="#telegram" class="navbar-tg">
+            <a href="#clouds">Что такое VPN?</a>
+            <a href="#forest">Возможности</a>
+            <a href="#underground">Как работает?</a>
+            <a href="#pricing">Тарифы</a>
+            <a href="https://t.me/mubvpn_bot" target="_blank" rel="noopener" class="navbar-tg">
                 <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
                 Telegram Бот
             </a>
         </div>
     </nav>
 
-    <!-- 1-Секция: Баш бет -->
+    <!-- 1: Главная -->
     <section class="section sky" id="sky">
         <div class="stars" id="stars"></div>
         <div class="hero-content">
             <span class="shield-icon">&#x1f6e1;&#xfe0f;</span>
-            <h1 class="reveal">VPN — Санариптик Коргоо</h1>
-            <p class="reveal">Интернеттеги купуялуулугуңузду сактаңыз. VPN сиздин маалыматтарыңызды шифрлеп, көзгө көрүнбөс кылат — булуттардын артында жашыргандай.</p>
+            <h1 class="reveal">VPN — Цифровая Защита</h1>
+            <p class="reveal">Защитите свою приватность в интернете. VPN шифрует ваши данные и делает вас невидимым — как будто вы спрятались за облаками.</p>
             <div class="hero-buttons reveal">
-                <a href="https://t.me/YOUR_BOT_USERNAME" target="_blank" rel="noopener" class="btn-primary btn-telegram">
+                <a href="https://t.me/mubvpn_bot" target="_blank" rel="noopener" class="btn-primary btn-telegram">
                     <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-                    Ботту Ачуу
+                    Открыть Бот
                 </a>
-                <a href="#clouds" class="btn-primary btn-outline">Кененирээк</a>
+                <a href="#clouds" class="btn-primary btn-outline">Подробнее</a>
             </div>
         </div>
         <div class="scroll-hint">
-            <span>Ылдый жылдырыңыз</span>
+            <span>Листайте вниз</span>
             <span class="arrow">&#x2304;</span>
         </div>
     </section>
 
-    <!-- 2-Секция: VPN деген эмне? -->
+    <!-- 2: Что такое VPN? -->
     <section class="section clouds" id="clouds">
         <div class="fog"></div>
         <div class="cloud cloud-1"></div>
         <div class="cloud cloud-2"></div>
         <div class="cloud cloud-3"></div>
         <div class="cloud-text">
-            <h2 class="reveal">&#x2601;&#xfe0f; VPN деген эмне?</h2>
-            <p class="reveal">VPN (Virtual Private Network) — бул интернеттеги жеке туннелиңиз. Сиздин бардык маалыматыңыз шифрленген туннель аркылуу өтөт. Эч ким — провайдериңиз да, хакерлер да — сиздин трафикти окуй албайт.</p>
+            <h2 class="reveal">&#x2601;&#xfe0f; Что такое VPN?</h2>
+            <p class="reveal">VPN (Virtual Private Network) — это ваш личный туннель в интернете. Все ваши данные проходят через зашифрованный канал. Никто — ни провайдер, ни хакеры — не может прочитать ваш трафик.</p>
             <div class="simple-explain reveal">
                 <div class="analogy">
                     <span class="analogy-icon">&#x1f4ec;</span>
                     <div>
-                        <h4>VPN'сиз</h4>
-                        <p>Сиз ачык кат жөнөтөсүз — жолдо ким болбосун окуй алат. Провайдериңиз, хакерлер, мамлекет — баары көрөт.</p>
+                        <h4>Без VPN</h4>
+                        <p>Вы отправляете открытое письмо — любой по дороге может его прочитать. Провайдер, хакеры, государство — все видят.</p>
                     </div>
                 </div>
                 <div class="analogy">
                     <span class="analogy-icon">&#x1f512;</span>
                     <div>
-                        <h4>VPN менен</h4>
-                        <p>Сиз кулпуланган сейфке салып жөнөтөсүз — ачкычы сизде жана алуучуда гана. Ортодогулар эч нерсе көрө албайт.</p>
+                        <h4>С VPN</h4>
+                        <p>Вы кладёте письмо в запертый сейф — ключ только у вас и у получателя. Никто посередине ничего не видит.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 3-Секция: Мумкунчулуктор -->
+    <!-- 3: Возможности -->
     <section class="section forest" id="forest">
         <div class="trees" id="trees"></div>
         <div class="forest-content">
-            <h2 class="reveal">&#x1f332; Эмне Мумкунчулуктор Берет?</h2>
-            <p class="forest-subtitle reveal">VPN сизге интернетте толук эркиндик жана коопсуздук берет</p>
+            <h2 class="reveal">&#x1f332; Что вы получаете?</h2>
+            <p class="forest-subtitle reveal">VPN даёт вам полную свободу и безопасность в интернете</p>
             <div class="vpn-cards">
                 <div class="vpn-card reveal">
                     <span class="card-icon">&#x1f512;</span>
-                    <h3>Шифрлөө</h3>
-                    <p>AES-256 шифрлөө — аскердик деңгээлдеги коргоо. Маалыматыңызды бузуу учун миллиарддаган жыл керек.</p>
+                    <h3>Шифрование</h3>
+                    <p>AES-256 шифрование — защита военного уровня. Чтобы взломать ваши данные, потребуются миллиарды лет.</p>
                 </div>
                 <div class="vpn-card reveal">
                     <span class="card-icon">&#x1f30d;</span>
-                    <h3>IP Жашыруу</h3>
-                    <p>Чыныгы IP дарегиңиз жашырылат. Дүйнөнүн каалаган жеринен кирип жаткандай көрүнөсүз.</p>
+                    <h3>Скрытие IP</h3>
+                    <p>Ваш настоящий IP-адрес скрыт. Вы выглядите так, будто заходите из любой точки мира.</p>
                 </div>
                 <div class="vpn-card reveal">
                     <span class="card-icon">&#x1f6ab;</span>
-                    <h3>Бөгөттөн Өтүү</h3>
-                    <p>Бөгөттөлгөн сайттарга жана кызматтарга эркин кириңиз. Интернет чек арасыз.</p>
+                    <h3>Обход блокировок</h3>
+                    <p>Свободный доступ к заблокированным сайтам и сервисам. Интернет без границ.</p>
                 </div>
                 <div class="vpn-card reveal">
                     <span class="card-icon">&#x1f4e1;</span>
-                    <h3>Коомдук Wi-Fi</h3>
-                    <p>Кафе, аэропорт Wi-Fi'да коопсуз болуңуз. VPN жалпы тармактарда маалыматыңызды коргойт.</p>
+                    <h3>Публичный Wi-Fi</h3>
+                    <p>Будьте в безопасности в кафе, аэропорту. VPN защищает ваши данные в общественных сетях.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 4-Секция: Кантип иштейт? -->
+    <!-- 4: Как работает? -->
     <section class="section underground" id="underground">
         <div class="roots" id="roots"></div>
         <div class="dirt-layers" id="dirtLayers"></div>
         <div class="particles" id="particles"></div>
         <div class="underground-content">
-            <h2 class="reveal">&#x26cf;&#xfe0f; Кантип Иштейт?</h2>
-            <p class="underground-subtitle reveal">4 жөнөкөй кадам менен толук коопсуздук</p>
+            <h2 class="reveal">&#x26cf;&#xfe0f; Как это работает?</h2>
+            <p class="underground-subtitle reveal">4 простых шага до полной безопасности</p>
             <div class="tunnel-info">
                 <div class="tunnel-step reveal-left">
                     <span class="step-num">01</span>
                     <div class="step-text">
-                        <h3>VPN'ди Иштетесиз</h3>
-                        <p>Telegram ботубузга кирип, /start басасыз. Сизге конфигурация файлы берилет — аны телефонуңузга же компьютериңизге орнотосуз.</p>
+                        <h3>Откройте бот</h3>
+                        <p>Зайдите в наш Telegram-бот @mubvpn_bot и нажмите /start. Вам будет выдан файл конфигурации — установите его на телефон или компьютер.</p>
                     </div>
                 </div>
                 <div class="tunnel-step reveal-right">
                     <span class="step-num">02</span>
                     <div class="step-text">
-                        <h3>Туннель Түзүлөт</h3>
-                        <p>Сиздин түзмөк менен VPN сервери ортосунда шифрленген туннель түзүлөт. Бардык маалымат AES-256 менен шифрленет.</p>
+                        <h3>Создаётся туннель</h3>
+                        <p>Между вашим устройством и VPN-сервером создаётся зашифрованный туннель. Все данные шифруются с помощью AES-256.</p>
                     </div>
                 </div>
                 <div class="tunnel-step reveal-left">
                     <span class="step-num">03</span>
                     <div class="step-text">
-                        <h3>IP Дарегиңиз Алмашат</h3>
-                        <p>Чыныгы IP дарегиңиз VPN сервердин IP дареги менен алмашылат. Сайттар сиздин чыныгы жайгашкан жериңизди көрө албайт.</p>
+                        <h3>IP-адрес меняется</h3>
+                        <p>Ваш реальный IP-адрес заменяется адресом VPN-сервера. Сайты не могут определить ваше настоящее местоположение.</p>
                     </div>
                 </div>
                 <div class="tunnel-step reveal-right">
                     <span class="step-num">04</span>
                     <div class="step-text">
-                        <h3>Эркин Серептеңиз</h3>
-                        <p>Баары даяр! Эми интернетте коопсуз жана эркин серептей аласыз. Эч ким сиздин трафикти көрө албайт.</p>
+                        <h3>Пользуйтесь свободно</h3>
+                        <p>Всё готово! Теперь вы можете безопасно и свободно пользоваться интернетом. Никто не видит ваш трафик.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 5-Секция: Тарифтер -->
+    <!-- 5: Тарифы -->
     <section class="section pricing" id="pricing">
         <div class="pricing-content">
-            <h2 class="reveal">&#x1f4b0; Тарифтер</h2>
-            <p class="pricing-subtitle reveal">Жогорку ылдамдыктагы серверлер. Рекламасыз. 24/7 колдоо.</p>
+            <h2 class="reveal">&#x1f4b0; Тарифы</h2>
+            <p class="pricing-subtitle reveal">Быстрые серверы. Без рекламы. Поддержка 24/7.</p>
             <div class="pricing-grid">
                 <div class="price-card reveal">
-                    <div class="price-duration">1 Ай</div>
+                    <div class="price-duration">1 Месяц</div>
                     <div class="price-amount">109.99</div>
-                    <div class="price-currency">&#x20bd; / айына</div>
-                    <div class="price-per-month">109.99 &#x20bd;/ай</div>
+                    <div class="price-currency">&#x20bd; / в месяц</div>
+                    <div class="price-per-month">109.99 &#x20bd;/мес</div>
                     <ul class="price-features">
-                        <li>Бардык серверлер</li>
-                        <li>Чексиз трафик</li>
-                        <li>24/7 колдоо</li>
+                        <li>Все серверы</li>
+                        <li>Безлимитный трафик</li>
+                        <li>Поддержка 24/7</li>
                     </ul>
-                    <a href="https://t.me/YOUR_BOT_USERNAME" target="_blank" rel="noopener" class="card-btn">Сатып алуу</a>
+                    <a href="https://t.me/mubvpn_bot" target="_blank" rel="noopener" class="card-btn">Купить</a>
                 </div>
                 <div class="price-card reveal">
-                    <div class="price-duration">3 Ай</div>
+                    <div class="price-duration">3 Месяца</div>
                     <div class="price-amount">309.99</div>
-                    <div class="price-currency">&#x20bd; / 3 айга</div>
-                    <div class="price-per-month">103.33 &#x20bd;/ай</div>
+                    <div class="price-currency">&#x20bd; / за 3 мес</div>
+                    <div class="price-per-month">103.33 &#x20bd;/мес</div>
                     <ul class="price-features">
-                        <li>Бардык серверлер</li>
-                        <li>Чексиз трафик</li>
-                        <li>24/7 колдоо</li>
+                        <li>Все серверы</li>
+                        <li>Безлимитный трафик</li>
+                        <li>Поддержка 24/7</li>
                     </ul>
-                    <a href="https://t.me/YOUR_BOT_USERNAME" target="_blank" rel="noopener" class="card-btn">Сатып алуу</a>
+                    <a href="https://t.me/mubvpn_bot" target="_blank" rel="noopener" class="card-btn">Купить</a>
                 </div>
                 <div class="price-card popular reveal">
-                    <span class="popular-tag">Популярдуу</span>
-                    <div class="price-duration">6 Ай</div>
+                    <span class="popular-tag">Популярный</span>
+                    <div class="price-duration">6 Месяцев</div>
                     <div class="price-amount">599.99</div>
-                    <div class="price-currency">&#x20bd; / 6 айга</div>
-                    <div class="price-per-month">100.00 &#x20bd;/ай</div>
+                    <div class="price-currency">&#x20bd; / за 6 мес</div>
+                    <div class="price-per-month">100.00 &#x20bd;/мес</div>
                     <ul class="price-features">
-                        <li>Бардык серверлер</li>
-                        <li>Чексиз трафик</li>
-                        <li>24/7 колдоо</li>
-                        <li>Артыкчылыктуу ылдамдык</li>
+                        <li>Все серверы</li>
+                        <li>Безлимитный трафик</li>
+                        <li>Поддержка 24/7</li>
+                        <li>Приоритетная скорость</li>
                     </ul>
-                    <a href="https://t.me/YOUR_BOT_USERNAME" target="_blank" rel="noopener" class="card-btn">Сатып алуу</a>
+                    <a href="https://t.me/mubvpn_bot" target="_blank" rel="noopener" class="card-btn">Купить</a>
                 </div>
                 <div class="price-card reveal">
-                    <div class="price-duration">1 Жыл</div>
+                    <div class="price-duration">1 Год</div>
                     <div class="price-amount">1 099</div>
-                    <div class="price-currency">&#x20bd; / жылына</div>
-                    <div class="price-per-month">91.67 &#x20bd;/ай — Эң арзан!</div>
+                    <div class="price-currency">&#x20bd; / в год</div>
+                    <div class="price-per-month">91.67 &#x20bd;/мес — Самый выгодный!</div>
                     <ul class="price-features">
-                        <li>Бардык серверлер</li>
-                        <li>Чексиз трафик</li>
-                        <li>24/7 колдоо</li>
-                        <li>Артыкчылыктуу ылдамдык</li>
+                        <li>Все серверы</li>
+                        <li>Безлимитный трафик</li>
+                        <li>Поддержка 24/7</li>
+                        <li>Приоритетная скорость</li>
                     </ul>
-                    <a href="https://t.me/YOUR_BOT_USERNAME" target="_blank" rel="noopener" class="card-btn">Сатып алуу</a>
+                    <a href="https://t.me/mubvpn_bot" target="_blank" rel="noopener" class="card-btn">Купить</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 6-Секция: Протоколдор -->
+    <!-- 6: Протоколы -->
     <section class="section deep-core" id="deep">
         <div class="core-glow"></div>
         <div class="deep-content">
-            <h2 class="reveal">&#x1f48e; VPN Протоколдору</h2>
-            <p class="reveal">Ар бир протокол ылдамдык менен коопсуздуктун ортосундагы балансты камсыздайт. Заманбап протоколдор экөөнү тең сунуштайт.</p>
+            <h2 class="reveal">&#x1f48e; VPN Протоколы</h2>
+            <p class="reveal">Каждый протокол обеспечивает баланс между скоростью и безопасностью. Современные протоколы дают и то, и другое.</p>
             <div class="protocol-badges reveal">
-                <span class="badge">WireGuard — Эң ылдам</span>
-                <span class="badge">OpenVPN — Эң ишенимдүү</span>
-                <span class="badge">IKEv2 — Мобилдик үчүн</span>
+                <span class="badge">WireGuard — Самый быстрый</span>
+                <span class="badge">OpenVPN — Самый надёжный</span>
+                <span class="badge">IKEv2 — Для мобильных</span>
                 <span class="badge">L2TP/IPSec — Классика</span>
-                <span class="badge">SSTP — Windows үчүн</span>
-                <span class="badge">ShadowSocks — Цензурадан өтүү</span>
+                <span class="badge">SSTP — Для Windows</span>
+                <span class="badge">ShadowSocks — Обход цензуры</span>
             </div>
         </div>
     </section>
 
-    <!-- 7-Секция: Telegram Бот -->
+    <!-- 7: Telegram Бот -->
     <section class="section telegram-section" id="telegram">
         <div class="telegram-content">
             <h2 class="reveal">&#x1f916; Telegram Бот</h2>
-            <p class="reveal">Бардык нерсе Telegram бот аркылуу! Тариф тандоо, төлөм, конфигурация алуу — баары бир жерде.</p>
+            <p class="reveal">Всё через Telegram-бот! Выбор тарифа, оплата, получение конфигурации — всё в одном месте.</p>
             <div class="tg-bot-card reveal">
                 <span class="tg-bot-icon">&#x1f4f1;</span>
-                <h3>@YOUR_BOT_USERNAME</h3>
-                <p>Ботту ачып /start басыңыз. Бот сизге тарифтерди көрсөтөт, төлөмдү кабыл алат жана VPN конфигурацияңызды автоматтык түрдө жөнөтөт.</p>
+                <h3>@mubvpn_bot</h3>
+                <p>Откройте бот и нажмите /start. Бот покажет тарифы, примет оплату и автоматически отправит вам конфигурацию VPN.</p>
                 <div class="tg-features">
                     <div class="tg-feature">
                         <span class="tg-feature-icon">&#x26a1;</span>
-                        Автоматтык туташуу
+                        Автоподключение
                     </div>
                     <div class="tg-feature">
                         <span class="tg-feature-icon">&#x1f4b3;</span>
-                        Онлайн төлөм
+                        Онлайн-оплата
                     </div>
                     <div class="tg-feature">
                         <span class="tg-feature-icon">&#x1f4e9;</span>
-                        24/7 колдоо
+                        Поддержка 24/7
                     </div>
                     <div class="tg-feature">
                         <span class="tg-feature-icon">&#x1f504;</span>
-                        Автоматтык узартуу
+                        Автопродление
                     </div>
                 </div>
-                <a href="https://t.me/YOUR_BOT_USERNAME" target="_blank" rel="noopener" class="btn-telegram-big">
+                <a href="https://t.me/mubvpn_bot" target="_blank" rel="noopener" class="btn-telegram-big">
                     <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-                    Ботту Баштоо
+                    Запустить Бот
                 </a>
             </div>
         </div>
@@ -484,22 +484,21 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-links">
-            <a href="#clouds">VPN деген эмне?</a>
-            <a href="#forest">Мумкунчулуктор</a>
-            <a href="#pricing">Тарифтер</a>
-            <a href="https://t.me/YOUR_BOT_USERNAME" target="_blank" rel="noopener">Telegram Бот</a>
+            <a href="#clouds">Что такое VPN?</a>
+            <a href="#forest">Возможности</a>
+            <a href="#pricing">Тарифы</a>
+            <a href="https://t.me/mubvpn_bot" target="_blank" rel="noopener">Telegram Бот</a>
         </div>
-        <p>&copy; 2024–2026 VPN Коргоо. Бардык укуктар корголгон.</p>
+        <p>&copy; 2024–2026 MUB VPN. Все права защищены.</p>
     </footer>
 
-    <!-- Калкып туруучу Telegram баскыч -->
-    <a href="https://t.me/YOUR_BOT_USERNAME" target="_blank" rel="noopener" class="floating-tg" id="floatingTg">
+    <!-- Плавающая кнопка Telegram -->
+    <a href="https://t.me/mubvpn_bot" target="_blank" rel="noopener" class="floating-tg" id="floatingTg">
         <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-        <span class="tg-tooltip">Telegram ботубуз</span>
+        <span class="tg-tooltip">Наш Telegram-бот</span>
     </a>
 
     <script>
-        // Жылдыздар
         const starsContainer = document.getElementById('stars');
         for (let i = 0; i < 120; i++) {
             const star = document.createElement('div');
@@ -509,7 +508,6 @@
             starsContainer.appendChild(star);
         }
 
-        // Дарактар
         const treesContainer = document.getElementById('trees');
         for (let i = 0; i < 30; i++) {
             const tree = document.createElement('div');
@@ -525,7 +523,6 @@
             treesContainer.appendChild(tree);
         }
 
-        // Тамырлар
         const rootsContainer = document.getElementById('roots');
         for (let i = 0; i < 20; i++) {
             const root = document.createElement('div');
@@ -534,7 +531,6 @@
             rootsContainer.appendChild(root);
         }
 
-        // Топурак катмарлары
         const dirtContainer = document.getElementById('dirtLayers');
         for (let i = 0; i < 15; i++) {
             const layer = document.createElement('div');
@@ -544,7 +540,6 @@
             dirtContainer.appendChild(layer);
         }
 
-        // Жаркыраган бөлүкчөлөр
         const particlesContainer = document.getElementById('particles');
         for (let i = 0; i < 25; i++) {
             const p = document.createElement('div');
@@ -555,13 +550,11 @@
             particlesContainer.appendChild(p);
         }
 
-        // Scroll анимация
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
         }, { threshold: 0.15 });
         document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => observer.observe(el));
 
-        // Параллакс эффект
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
             const stars = document.getElementById('stars');
@@ -571,7 +564,6 @@
             });
         });
 
-        // Мобилдик меню
         document.getElementById('hamburger').addEventListener('click', () => {
             document.getElementById('navLinks').classList.toggle('open');
         });

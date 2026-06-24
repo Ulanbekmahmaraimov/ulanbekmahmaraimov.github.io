@@ -208,6 +208,31 @@
         }
         .floating-tg:hover .tg-tooltip { opacity: 1; }
 
+        /* ===== СКАЧАТЬ КЛИЕНТ ===== */
+        .download-section { background: linear-gradient(180deg, #0d0030 0%, #0a0a2e 50%, #050218 100%); min-height: 100vh; flex-direction: column; }
+        .download-content { z-index: 10; padding: 2rem; max-width: 950px; width: 100%; text-align: center; }
+        .download-content h2 { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 800; background: linear-gradient(135deg, #00f5a0, #00d9f5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.6rem; }
+        .download-subtitle { font-size: 1rem; opacity: 0.6; margin-bottom: 0.5rem; }
+        .download-version { font-size: 0.82rem; opacity: 0.35; margin-bottom: 2rem; }
+        .os-tabs { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .os-tab { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 0.7rem 1.5rem; font-size: 0.9rem; font-weight: 600; color: rgba(255,255,255,0.6); cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 0.5rem; }
+        .os-tab:hover { border-color: rgba(0,245,160,0.3); color: #fff; }
+        .os-tab.active { background: rgba(0,245,160,0.1); border-color: rgba(0,245,160,0.5); color: #00f5a0; }
+        .os-tab-icon { font-size: 1.3rem; }
+        .os-panel { display: none; }
+        .os-panel.active { display: block; }
+        .dl-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+        .dl-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 1.5rem 1.2rem; transition: all 0.3s; text-align: center; }
+        .dl-card:hover { transform: translateY(-5px); border-color: rgba(0,245,160,0.4); box-shadow: 0 15px 40px rgba(0,245,160,0.08); }
+        .dl-card-icon { font-size: 2.2rem; margin-bottom: 0.6rem; display: block; }
+        .dl-card h4 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.3rem; }
+        .dl-card p { font-size: 0.78rem; opacity: 0.45; margin-bottom: 1rem; line-height: 1.4; }
+        .dl-btn { display: inline-block; padding: 0.55rem 1.3rem; border-radius: 25px; background: linear-gradient(135deg, #00f5a0, #00d9f5); color: #000; text-decoration: none; font-weight: 700; font-size: 0.82rem; transition: all 0.3s; }
+        .dl-btn:hover { transform: scale(1.05); box-shadow: 0 6px 25px rgba(0,245,160,0.3); }
+        .dl-btn-alt { background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.15); }
+        .dl-btn-alt:hover { border-color: rgba(0,245,160,0.4); box-shadow: 0 6px 25px rgba(0,245,160,0.15); }
+        .dl-note { font-size: 0.78rem; opacity: 0.35; margin-top: 1.5rem; line-height: 1.6; }
+
         /* ===== АНИМАЦИИ ===== */
         .reveal { opacity: 0; transform: translateY(60px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -240,6 +265,7 @@
             <a href="#forest">Возможности</a>
             <a href="#underground">Как работает?</a>
             <a href="#pricing">Тарифы</a>
+            <a href="#download">Скачать</a>
             <a href="https://t.me/mubvpn_pay_bot" target="_blank" rel="noopener" class="navbar-tg">
                 <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
                 Telegram Бот
@@ -446,7 +472,102 @@
         </div>
     </section>
 
-    <!-- 7: Telegram Бот -->
+    <!-- 7: Скачать клиент -->
+    <section class="section download-section" id="download">
+        <div class="download-content">
+            <h2 class="reveal">&#x1f4e5; Скачать VPN-клиент</h2>
+            <p class="download-subtitle reveal">Clash Verge Rev v2.5.1 — быстрый и надёжный клиент</p>
+            <p class="download-version reveal">Выберите вашу платформу и скачайте</p>
+
+            <div class="os-tabs reveal">
+                <div class="os-tab active" data-os="mobile"><span class="os-tab-icon">&#x1f4f1;</span> Телефон</div>
+                <div class="os-tab" data-os="windows"><span class="os-tab-icon">&#x1fa9f;</span> Windows</div>
+                <div class="os-tab" data-os="mac"><span class="os-tab-icon">&#x1f34e;</span> macOS</div>
+                <div class="os-tab" data-os="linux"><span class="os-tab-icon">&#x1f427;</span> Linux</div>
+            </div>
+
+            <!-- Телефон -->
+            <div class="os-panel active" id="panel-mobile">
+                <div class="dl-cards">
+                    <div class="dl-card reveal">
+                        <span class="dl-card-icon">&#x1f4f1;</span>
+                        <h4>Android</h4>
+                        <p>Google Play — автообновление</p>
+                        <a href="https://play.google.com/store/apps/details?id=com.happproxy" target="_blank" rel="noopener" class="dl-btn">Google Play</a>
+                    </div>
+                    <div class="dl-card reveal">
+                        <span class="dl-card-icon">&#x1f34f;</span>
+                        <h4>iPhone / iPad</h4>
+                        <p>App Store — Happ Proxy</p>
+                        <a href="https://apps.apple.com/ru/app/happ-proxy-utility-plus/id6746188973" target="_blank" rel="noopener" class="dl-btn">App Store</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Windows -->
+            <div class="os-panel" id="panel-windows">
+                <div class="dl-cards">
+                    <div class="dl-card reveal">
+                        <span class="dl-card-icon">&#x1fa9f;</span>
+                        <h4>Windows x64</h4>
+                        <p>Для большинства ПК и ноутбуков</p>
+                        <div style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">
+                            <a href="https://gh-proxy.org/https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.5.1/Clash.Verge_2.5.1_x64-setup.exe" target="_blank" rel="noopener" class="dl-btn">Скачать .exe</a>
+                        </div>
+                    </div>
+                    <div class="dl-card reveal">
+                        <span class="dl-card-icon">&#x1fa9f;</span>
+                        <h4>Windows ARM64</h4>
+                        <p>Для ARM-устройств (Surface Pro X и др.)</p>
+                        <a href="https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.5.1/Clash.Verge_2.5.1_arm64-setup.exe" target="_blank" rel="noopener" class="dl-btn dl-btn-alt">Скачать .exe</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- macOS -->
+            <div class="os-panel" id="panel-mac">
+                <div class="dl-cards">
+                    <div class="dl-card reveal">
+                        <span class="dl-card-icon">&#x1f34e;</span>
+                        <h4>Apple Silicon</h4>
+                        <p>MacBook / iMac с чипом M1, M2, M3, M4</p>
+                        <div style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">
+                            <a href="https://gh-proxy.org/https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.5.1/Clash.Verge_2.5.1_aarch64.dmg" target="_blank" rel="noopener" class="dl-btn">Скачать .dmg</a>
+                            <a href="https://gitlab.com/api/v4/projects/73182635/packages/generic/clash-verge/v2.5.1/Clash.Verge_2.5.1_aarch64.dmg" target="_blank" rel="noopener" class="dl-btn dl-btn-alt">Зеркало</a>
+                        </div>
+                    </div>
+                    <div class="dl-card reveal">
+                        <span class="dl-card-icon">&#x1f34e;</span>
+                        <h4>Intel</h4>
+                        <p>Старые MacBook / iMac с Intel процессором</p>
+                        <a href="https://gh-proxy.org/https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.5.1/Clash.Verge_2.5.1_x64.dmg" target="_blank" rel="noopener" class="dl-btn">Скачать .dmg</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Linux -->
+            <div class="os-panel" id="panel-linux">
+                <div class="dl-cards">
+                    <div class="dl-card reveal">
+                        <span class="dl-card-icon">&#x1f427;</span>
+                        <h4>Debian / Ubuntu x64</h4>
+                        <p>sudo apt install ./Clash.Verge_2.5.1_amd64.deb</p>
+                        <a href="https://gh-proxy.org/https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.5.1/Clash.Verge_2.5.1_amd64.deb" target="_blank" rel="noopener" class="dl-btn">Скачать .deb</a>
+                    </div>
+                    <div class="dl-card reveal">
+                        <span class="dl-card-icon">&#x1f427;</span>
+                        <h4>Debian / Ubuntu ARM64</h4>
+                        <p>Для ARM-устройств (Raspberry Pi и др.)</p>
+                        <a href="https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.5.1/Clash.Verge_2.5.1_arm64.deb" target="_blank" rel="noopener" class="dl-btn dl-btn-alt">Скачать .deb</a>
+                    </div>
+                </div>
+            </div>
+
+            <p class="dl-note reveal">После установки откройте приложение и вставьте URL-конфигурацию, полученную от нашего <a href="https://t.me/mubvpn_pay_bot" target="_blank" rel="noopener" style="color:#00f5a0;text-decoration:none;">Telegram-бота</a>.</p>
+        </div>
+    </section>
+
+    <!-- 8: Telegram Бот -->
     <section class="section telegram-section" id="telegram">
         <div class="telegram-content">
             <h2 class="reveal">&#x1f916; Telegram Бот</h2>
@@ -493,6 +614,7 @@
             <a href="#clouds">Что такое VPN?</a>
             <a href="#forest">Возможности</a>
             <a href="#pricing">Тарифы</a>
+            <a href="#download">Скачать</a>
             <a href="https://t.me/mubvpn_pay_bot" target="_blank" rel="noopener">Telegram Бот</a>
             <a href="https://t.me/kl_mub" target="_blank" rel="noopener">Поддержка</a>
         </div>
@@ -568,6 +690,15 @@
             if (stars) stars.style.transform = `translateY(${scrollY*0.3}px)`;
             document.querySelectorAll('.cloud').forEach((cloud, i) => {
                 cloud.style.transform = `translateY(${scrollY*(0.1+i*0.05)}px)`;
+            });
+        });
+
+        document.querySelectorAll('.os-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.os-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.os-panel').forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById('panel-' + tab.dataset.os).classList.add('active');
             });
         });
 

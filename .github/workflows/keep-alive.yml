@@ -1,0 +1,15 @@
+name: Keep Bot Alive
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Bot
+        run: |
+          curl -sf https://mubvpn-bot.onrender.com || echo "Ping failed, bot may be starting up"
+          echo "Pinged at $(date -u)"
